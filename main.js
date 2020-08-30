@@ -4,6 +4,9 @@ const Hapi = require('@hapi/hapi');
 
 const mockUsers = require('./mock/users');
 const mockArticles = require('./mock/articles');
+const mockJournals = require('./mock/journals');
+
+const TTL_1M = 60000;
 
 // Create a server with a host and port
 const server = Hapi.server({
@@ -32,7 +35,7 @@ server.route({
 
 server.route({
 	method: 'GET',
-	path: '/api/v1/getUsers',
+	path: '/api/v1/users/getUsers',
 	handler: (request, h) => {
 		return { data: mockUsers };
 	}
@@ -40,8 +43,17 @@ server.route({
 
 server.route({
 	method: 'GET',
-	path: '/api/v1/getArticles',
-	options: {cache: { expiresIn: 60000 }},
+	path: '/api/v1/journals/getJournals',
+	options: {cache: { expiresIn: TTL_1M }},
+	handler: (request, h) => {
+		return { data: mockJournals };
+	}
+});
+
+server.route({
+	method: 'GET',
+	path: '/api/v1/journals/getArticles',
+	options: {cache: { expiresIn: TTL_1M }},
 	handler: (request, h) => {
 		return { data: mockArticles };
 	}
