@@ -5,6 +5,7 @@ const Hapi = require('@hapi/hapi');
 const mockUsers = require('./mock/users');
 const mockArticles = require('./mock/articles');
 const mockJournals = require('./mock/journals');
+const mockPage = require('./mock/page');
 
 const TTL_1M = 60000;
 
@@ -38,6 +39,15 @@ server.route({
 	path: '/api/v1/users/getUsers',
 	handler: (request, h) => {
 		return { data: mockUsers };
+	}
+});
+
+server.route({
+	method: 'GET',
+	path: '/api/v1/pages/getPage/{pageId}',
+	handler: (request, h) => {
+		const pageId = request.params.pageId;
+		return { data: mockPage };
 	}
 });
 
