@@ -14,14 +14,14 @@ const server = Hapi.server({
 	port: 4000
 });
 
-server.state('OPP_SessionID', {
-    ttl: 24 * 60 * 60 * 1000, // One day
-    isSecure: false,
-    isHttpOnly: false,
-		autoValue: async () => { return {} },
-    path: '/',
-    encoding: 'base64json'
-});
+// server.state('OPP_SessionID', {
+//     ttl: 24 * 60 * 60 * 1000, // One day
+//     isSecure: false,
+//     isHttpOnly: false,
+// 		autoValue: async () => { return {} },
+//     path: '/',
+//     encoding: 'base64json'
+// });
 
 
 // Add the routes
@@ -69,42 +69,42 @@ server.route({
 
 
 
-server.route({
-    path: '/album/{album}/{song?}',
-    method: 'GET',
-    handler: function getAlbum(request, h) {
-	    return 'You asked for ' +
-	        (request.params.song ? request.params.song + ' from ' : '') +
-	        request.params.album;
-		}
-});
-
-
-server.route({
-    path: '/session/set',
-    method: 'GET',
-    handler: function (request, h) {
-	    // let session = JSON.parse(request.state.OPP_SessionID) || {};
-	    let session = request.state.OPP_SessionID || {};
-
-			session.user = 'joe';
-	    session.last = Date.now();
-
-	    // return h.response('Success').state('OPP_SessionID', JSON.stringify(session));
-	    return h.response('Success').state('OPP_SessionID', session);
-		}
-});
-
-server.route({
-    path: '/session/get',
-    method: 'GET',
-    handler: function (request, h) {
-	    // let session = JSON.parse(request.state.OPP_SessionID) || {};
-	    let session = request.state.OPP_SessionID || {};
-
-	    return session;
-		}
-});
+// server.route({
+//     path: '/album/{album}/{song?}',
+//     method: 'GET',
+//     handler: function getAlbum(request, h) {
+// 	    return 'You asked for ' +
+// 	        (request.params.song ? request.params.song + ' from ' : '') +
+// 	        request.params.album;
+// 		}
+// });
+//
+//
+// server.route({
+//     path: '/session/set',
+//     method: 'GET',
+//     handler: function (request, h) {
+// 	    // let session = JSON.parse(request.state.OPP_SessionID) || {};
+// 	    let session = request.state.OPP_SessionID || {};
+//
+// 			session.user = 'joe';
+// 	    session.last = Date.now();
+//
+// 	    // return h.response('Success').state('OPP_SessionID', JSON.stringify(session));
+// 	    return h.response('Success').state('OPP_SessionID', session);
+// 		}
+// });
+//
+// server.route({
+//     path: '/session/get',
+//     method: 'GET',
+//     handler: function (request, h) {
+// 	    // let session = JSON.parse(request.state.OPP_SessionID) || {};
+// 	    let session = request.state.OPP_SessionID || {};
+//
+// 	    return session;
+// 		}
+// });
 
 
 // Start the server
