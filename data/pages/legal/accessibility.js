@@ -3,5 +3,10 @@ module.exports = {
 	title: 'Accessibility',
 	description: 'Accessibility statement',
 	template: 'oneColumnReadingWidth',
-	content: []
+	content: [
+		{
+			type: 'html',
+			value: '<p>This platform aims to be very accessible.</p>',
+		},
+	]
 };

@@ -1,17 +1,34 @@
 module.exports = [
-	{ id: 'ACE', name: 'American Journal of Countless Examples', publisher: 'AUP' },
-	{ id: 'BPP', name: 'British Journal of Practical Puns', publisher: 'BUP' },
-	{ id: 'JBR', name: 'Journal of Believable Research', publisher: 'JPub' },
+	{
+		id: 'JBR',
+		name: 'Journal of Believable Research',
+		publisher: {
+			name: 'Open Publishing Platform',
+			url: 'https://OpenPublishingPlatform.com/'
+		},
+		description: `Journal of Believable Research is a fictional journal, invented to demonstrate the Open Publishing Platform.`,
+		editorialBoard: [],
+		identifiers: {
+			mnemonic: 'JBR',
+			doi: '10.0000/0000',
+			issnPrint: '0000-0000',
+			issnOnline: '0000-0000',
+		}
+	},
 	{
 		id: 'eLife',
-		name: 'eLife',
+		name: 'eLife Sciences',
 		publisher: {
 			name: 'eLife',
 			url: 'https://elifesciences.org/'
 		},
-		profile: `
-			eLife works to improve research communication through open science and open technology innovation.
-			eLife is a non-profit organisation inspired by research funders and led by scientists.
-			Our mission is to help scientists accelerate discovery by operating a platform for research communication that encourages and recognises the most responsible behaviours in science.`,
+		description: `eLife is a selective, not for profit peer-reviewed open access scientific journal for the biomedical and life sciences. It was established at the end of 2012 by the Howard Hughes Medical Institute, Max Planck Society, and Wellcome Trust, following a workshop held in 2010 at the Janelia Farm Research Campus.`,
+		editorialBoard: [],
+		identifiers: {
+			mnemonic: 'eLife',
+			doi: '10.0000/0000',
+			issnPrint: '0000-0000',
+			issnOnline: '0000-0000',
+		}
 	},
 ];
