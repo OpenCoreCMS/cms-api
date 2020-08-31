@@ -25,14 +25,19 @@ server.route({
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/journals/getJournals',
+	method: 'GET', path: '/api/v1/journals/getAllJournals',
 	options: { cache: { expiresIn: TTL_1M } },
-	handler: require('./routes/journals/getJournals')
+	handler: require('./routes/journals/getAllJournals')
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/journals/getArticles',
-	handler: require('./routes/journals/getArticles')
+	method: 'GET', path: '/api/v1/journals/{journalId}/getArticles',
+	handler: require('./routes/journals/[journalId]/getArticles')
+});
+
+server.route({
+	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
+	handler: require('./routes/journals/[journalId]/getJournal')
 });
 
 server.route({
