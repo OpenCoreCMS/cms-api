@@ -1,5 +1,5 @@
 module.exports = {
-	url: '/help/contact',
+	url: '/contact-us',
 	title: 'Contact us',
 	description: 'Contact info',
 	template: 'oneColumnReadingWidth',
