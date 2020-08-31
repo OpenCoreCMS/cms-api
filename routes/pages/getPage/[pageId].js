@@ -1,10 +1,6 @@
-function pages_GetPage_PageId_handler(request, h) {
+function getPageHandler(request, h) {
   const pageId = request.params.pageId;
   console.log(`Serving page: ${pageId}`);
-
-  if (pageId.includes('favicon')) {
-    return {};
-  }
 
   if (!pageId || !pageId.length) {
     return { error: 'pageId must be provided'};
@@ -21,4 +17,4 @@ function pages_GetPage_PageId_handler(request, h) {
 
 }
 
-module.exports = pages_GetPage_PageId_handler;
+module.exports = getPageHandler;
