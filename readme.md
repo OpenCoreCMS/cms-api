@@ -2,4 +2,6 @@
 
 ## Getting started
 
-Clone the repo and start the app with `node@14 main.js`.
+Clone the repo and start the app with `npm run dev`.
+
+Requires Node 14.
