@@ -7,6 +7,7 @@ const mockArticles = require('./data/articles');
 const mockJournals = require('./data/journals');
 
 const TTL_1M = 60000;
+const TTL_1H = 60 * TTL_1M;
 
 // Create a server with a host and port
 const server = Hapi.server({
@@ -68,9 +69,8 @@ server.route({
 server.route({
 	method: 'GET',
 	path: '/api/v1/search',
-	handler: (request, h) => {
-		return { data: mockArticles };
-	}
+	options: {cache: { expiresIn: TTL_1H }},
+	handler: require('./routes/search')
 });
 
 
