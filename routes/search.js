@@ -1,8 +1,10 @@
 const axios = require('axios');
+
 module.exports = function searchHandler(request, h) {
   const phrase = request.query.phrase;
   console.log(`Searching for phrase: ${phrase}`);
 
+  let fullData;
   const fullUrl = `https://prod--gateway.elifesciences.org/search?for=${phrase}`;
   console.log(`Sending request: ${fullUrl}`);
 
