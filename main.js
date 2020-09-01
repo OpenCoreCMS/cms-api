@@ -36,6 +36,11 @@ server.route({
 });
 
 server.route({
+	method: 'GET', path: '/api/v1/articles/getArticle/{articleId}',
+	handler: require('./routes/articles/getArticle/[articleId]')
+});
+
+server.route({
 	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
 	handler: require('./routes/journals/[journalId]/getJournal')
 });
