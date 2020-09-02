@@ -7,6 +7,10 @@ const TTL_1H = 60 * TTL_1M;
 
 const server = Hapi.server({ host: 'localhost', port: 4000 });
 
+/**
+ * Base route
+ * Returns a basic 200 OK response
+ */
 server.route({
 	method: 'GET', path: '/',
 	handler: (request, h) => {
@@ -14,16 +18,20 @@ server.route({
 	}
 });
 
-server.route({
-	method: 'GET', path: '/api/v1/users/getUsers',
-  handler: require('./routes/users/getUsers')
-});
-
+// /api/v1/pages routes
 server.route({
 	method: 'GET', path: '/api/v1/pages/getPage/{pageId}',
 	handler: require('./routes/pages/getPage/[pageId]')
 });
 
+// /api/v1/search routes
+server.route({
+	method: 'GET', path: '/api/v1/search',
+	options: { cache: { expiresIn: TTL_1H } },
+	handler: require('./routes/search')
+});
+
+// /api/v1/content/journals routes
 server.route({
 	method: 'GET', path: '/api/v1/journals/getAllJournals',
 	options: { cache: { expiresIn: TTL_1M } },
@@ -31,26 +39,28 @@ server.route({
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/journals/{journalId}/getArticles',
-	handler: require('./routes/journals/[journalId]/getArticles')
+	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
+	handler: require('./routes/journals/[journalId]/getJournal')
 });
 
+// /api/v1/content/articles routes
 server.route({
 	method: 'GET', path: '/api/v1/articles/getArticle/{articleId}',
 	handler: require('./routes/articles/getArticle/[articleId]')
 });
 
-server.route({
-	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
-	handler: require('./routes/journals/[journalId]/getJournal')
-});
 
-server.route({
-	method: 'GET', path: '/api/v1/search',
-	options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/search')
-});
+// Unused routes
 
+// server.route({
+// 	method: 'GET', path: '/api/v1/journals/{journalId}/getArticles',
+// 	handler: require('./routes/journals/[journalId]/getArticles')
+// });
+
+// server.route({
+// 	method: 'GET', path: '/api/v1/users/getUsers',
+//   handler: require('./routes/users/getUsers')
+// });
 
 async function startServer() {
 	await server.start();
