@@ -1,32 +1,47 @@
 const axios = require('axios');
+const CACHE = {};
 
 module.exports = function searchHandler(request, h) {
   const phrase = request.query.phrase;
-  console.log(`Searching for phrase: ${phrase}`);
-
-  let fullData;
   const fullUrl = `https://prod--gateway.elifesciences.org/search?for=${phrase}`;
-  console.log(`Sending request: ${fullUrl}`);
+
+  if (CACHE[fullUrl]) {
+    console.log(`Fetching results for phrase search: ${phrase} from cache`);
+    return CACHE[fullUrl];
+  }
+
+  console.log(`Fetching results for phrase search: ${phrase} from API`);
 
   return axios.get(fullUrl)
     .then(function (response) {
-      fullData = response.data;
+      const finalResponse = {
+        error: null,
+        info: {
+          requestProcessingMs: 324,
+          requestWaitingMs: 324,
+        },
+        data: {
+          total: response.data.total,
+          results: response.data.items,
+          aggs: {
+            types: response.data.types,
+            subjects: response.data.subjects,
+          }
+        },
+      }
+
+      finalResponse.data.results = finalResponse.data.results.map((res) => {
+        res.url = `/journals/eLife/article/${res.id}/${res.title}`
+        return res;
+      })
+
+      CACHE[fullUrl] = finalResponse;
+      return finalResponse;
+      // return { data: response.data };
     })
     .catch(function (error) {
-      // console.log(error.request.res.statusCode);
-      // return res.status(500).send('Bad response from API');
-      fullData = error
-    })
-    .then(function () {
-      return {
-        data: {
-          total: fullData.total,
-          results: fullData.items,
-          aggs: {
-            types: fullData.types,
-            subjects: fullData.subjects,
-          }
-        }
-      };
+      console.log(error);
+      return { error: 'BFF had a problem resolving data from an external API' }
     });
+
 }
