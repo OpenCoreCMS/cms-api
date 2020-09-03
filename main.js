@@ -33,7 +33,7 @@ server.route({
 
 // /api/v1/journals routes
 server.route({
-	method: 'GET', path: '/api/v1/journals/getAll',
+	method: 'GET', path: '/api/v1/journals/getAllJournals',
 	options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/journals/getAllJournals')
 });
