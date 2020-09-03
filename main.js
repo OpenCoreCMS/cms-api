@@ -31,9 +31,9 @@ server.route({
 	handler: require('./routes/search')
 });
 
-// /api/v1/content/journals routes
+// /api/v1/journals routes
 server.route({
-	method: 'GET', path: '/api/v1/journals/getAllJournals',
+	method: 'GET', path: '/api/v1/journals/getAll',
 	options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/journals/getAllJournals')
 });
@@ -44,25 +44,16 @@ server.route({
 	handler: require('./routes/journals/[journalId]/getJournal')
 });
 
-// /api/v1/content/articles routes
 server.route({
-	method: 'GET', path: '/api/v1/articles/getArticle/{articleId}',
+  method: 'GET', path: '/api/v1/journals/{journalId}/getCurrentIssue',
+  handler: require('./routes/journals/[journalId]/getCurrentIssue')
+});
+
+server.route({
+	method: 'GET', path: '/api/v1/journals/articles/{articleId}/getArticle',
   options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/articles/getArticle/[articleId]')
+	handler: require('./routes/journals/articles/[articleId]/getArticle')
 });
-
-
-// Unused routes
-
-server.route({
-	method: 'GET', path: '/api/v1/journals/{journalId}/getCurrentIssue',
-	handler: require('./routes/journals/[journalId]/getCurrentIssue')
-});
-
-// server.route({
-// 	method: 'GET', path: '/api/v1/users/getUsers',
-//   handler: require('./routes/users/getUsers')
-// });
 
 async function startServer() {
 	await server.start();
