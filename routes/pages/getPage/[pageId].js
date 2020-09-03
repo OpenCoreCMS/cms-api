@@ -1,11 +1,19 @@
-function getPageHandler(request, h) {
-  const pagePath = request.params.pageId;
+function fetchDynamicPageData(pagePath) {
+  let rtn;
 
-  if (!pagePath || !pagePath.length || !pagePath.startsWith('/')) {
-    return { error: 'Invalid pagePath provided. pagePath must be URL escaped and start with a slash.' };
+  try {
+    rtn = require(`../../../data/pages${pagePath}`);
+    console.log(`[API] OK Page retrieved: ${pagePath}`);
+  } catch (err) {
+    console.log(`[API] ERR Page not found: ${pagePath}`)
+    rtn = { error: 'Page not found', statusCode: 404 }
   }
 
-  console.log(`[API] Retrieving page: ${pagePath}`);
+  return rtn;
+}
+
+function buildPageDataObject(pageRecord) {
+  const pagePath = '/home';
 
   const systemPageData = {
     breadcrumbs: [
@@ -15,18 +23,24 @@ function getPageHandler(request, h) {
     url: pagePath
   };
 
-  try {
-    let dynamicPageData = require(`../../../data/pages${pagePath}`);
+  const finalPageData = Object.assign({}, pageRecord, systemPageData);
 
-    const finalPageData = Object.assign({}, dynamicPageData, systemPageData);
+  return finalPageData;
+}
 
-    return { data: finalPageData };
-  } catch (err) {
-    console.log(err);
-    console.log(`ERR Page "${pagePath}" not found`)
-    return { data: { error: 'Page not found', statusCode: 404 }};
+
+function getPageHandler(request, h) {
+  const pagePath = request.params.pageId;
+  // console.log('>> pagePath:', pagePath)
+
+  if (!pagePath || !pagePath.length || !pagePath.startsWith('/')) {
+    return { error: 'Invalid pagePath provided. pagePath must be URL escaped and start with a slash.' };
   }
 
+  const dynamicPageData = fetchDynamicPageData(pagePath);
+  const finalPageData = buildPageDataObject(dynamicPageData);
+  return { data: finalPageData };
+  // return { data: { error: 'Page not found', statusCode: 404 }};
 }
 
 module.exports = getPageHandler;
