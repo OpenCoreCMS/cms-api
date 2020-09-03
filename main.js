@@ -34,28 +34,30 @@ server.route({
 // /api/v1/content/journals routes
 server.route({
 	method: 'GET', path: '/api/v1/journals/getAllJournals',
-	options: { cache: { expiresIn: TTL_1M } },
+	options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/journals/getAllJournals')
 });
 
 server.route({
 	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
+  options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/journals/[journalId]/getJournal')
 });
 
 // /api/v1/content/articles routes
 server.route({
 	method: 'GET', path: '/api/v1/articles/getArticle/{articleId}',
+  options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/articles/getArticle/[articleId]')
 });
 
 
 // Unused routes
 
-// server.route({
-// 	method: 'GET', path: '/api/v1/journals/{journalId}/getArticles',
-// 	handler: require('./routes/journals/[journalId]/getArticles')
-// });
+server.route({
+	method: 'GET', path: '/api/v1/journals/{journalId}/getCurrentIssue',
+	handler: require('./routes/journals/[journalId]/getCurrentIssue')
+});
 
 // server.route({
 // 	method: 'GET', path: '/api/v1/users/getUsers',
