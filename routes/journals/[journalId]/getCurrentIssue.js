@@ -11,11 +11,11 @@ module.exports = function searchHandler(request, h) {
   const fullUrl = `https://prod--gateway.elifesciences.org/covers/current`;
 
   if (CACHE[journalId]) {
-    console.log(`Fetching results for current issue of ${journalId} from cache`);
+    console.log(`[Cache] Fetching results for current issue of journal: ${journalId}`);
     return CACHE[journalId];
   }
 
-  console.log(`Fetching results for current issue of ${journalId} from API`);
+  console.log(`[API] Fetching results for current issue of journal: ${journalId}`);
 
   return axios.get(fullUrl)
     .then(function (response) {

@@ -6,11 +6,11 @@ module.exports = function searchHandler(request, h) {
   const fullUrl = `https://prod--gateway.elifesciences.org/search?for=${phrase}`;
 
   if (CACHE[fullUrl]) {
-    console.log(`Fetching results for phrase search: ${phrase} from cache`);
+    console.log(`[Cache] Fetching results for phrase search: "${phrase}"`);
     return CACHE[fullUrl];
   }
 
-  console.log(`Fetching results for phrase search: ${phrase} from API`);
+  console.log(`[API] Fetching results for phrase search: "${phrase}"`);
 
   return axios.get(fullUrl)
     .then(function (response) {

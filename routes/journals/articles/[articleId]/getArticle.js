@@ -6,11 +6,11 @@ module.exports = function getAllJournalsHandler(request, h) {
   const fullUrl = `https://prod--gateway.elifesciences.org/articles/${articleId}`;
 
   if (CACHE[fullUrl]) {
-    console.log(`Retrieving article: ${articleId} from cache`);
+    console.log(`[Cache] Retrieving article: ${articleId}`);
     return { data: CACHE[fullUrl] };
   }
 
-  console.log(`Retrieving article: ${articleId} from API`);
+  console.log(`[API] Retrieving article: ${articleId}`);
 
   return axios.get(fullUrl)
     .then(function (response) {
