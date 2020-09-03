@@ -11,29 +11,28 @@
 
 
 const axios = require('axios');
+const CACHE = {};
 
 // elife handler
 // /articles/{id}
 module.exports = function getAllJournalsHandler(request, h) {
   const articleId = request.params.articleId;
-  console.log(`Retrieving article: ${articleId}`);
-
-  let fullData;
   const fullUrl = `https://prod--gateway.elifesciences.org/articles/${articleId}`;
-  console.log(`Sending request: ${fullUrl}`);
+
+  if (CACHE[fullUrl]) {
+    console.log(`Retrieving article: ${articleId} from cache`);
+    return { data: CACHE[fullUrl] };
+  }
+
+  console.log(`Retrieving article: ${articleId} from API`);
 
   return axios.get(fullUrl)
     .then(function (response) {
-      fullData = response.data;
+      CACHE[fullUrl] = response.data;
+      return { data: response.data };
     })
     .catch(function (error) {
-      // console.log(error.request.res.statusCode);
-      // return res.status(500).send('Bad response from API');
-      fullData = error
-    })
-    .then(function () {
-      return {
-        data: fullData
-      };
+      console.log(error);
+      return { error: 'BFF had a problem resolving data from an external API' }
     });
 }
