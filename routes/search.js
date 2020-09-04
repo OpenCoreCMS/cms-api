@@ -1,9 +1,34 @@
 const axios = require('axios');
 const CACHE = {};
 
+// https://prod--gateway.elifesciences.org/search
+//         ?for=covid
+//
+//         &page=4
+//         &per-page=10
+//
+//         &sort=relevance
+//         &order=desc
+//
+//         &subject[]=cell-biology
+//
+//         &start-date=2010-01-01
+//         &end-date=2020-12-31
+
+
 module.exports = function searchHandler(request, h) {
-  const phrase = request.query.phrase;
-  const fullUrl = `https://prod--gateway.elifesciences.org/search?for=${phrase}`;
+  const { phrase, pageNumber = 1, pageSize = 10 } = request.query;
+
+  let fullUrl = `https://prod--gateway.elifesciences.org/search?`;
+  if (phrase) {
+    fullUrl += `for=${phrase}&`;
+  }
+  if (pageNumber) {
+    fullUrl += `page=${pageNumber}&`;
+  }
+  if (pageSize) {
+    fullUrl += `per-page=${pageSize}&`;
+  }
 
   if (CACHE[fullUrl]) {
     console.log(`[Cache] Fetching results for phrase search: "${phrase}"`);
@@ -22,6 +47,15 @@ module.exports = function searchHandler(request, h) {
         },
         data: {
           total: response.data.total,
+          pages: {
+            pageNumber: pageNumber,
+            pageSize: pageSize,
+            totalPages: Math.ceil(response.data.total / pageSize),
+          },
+          query: {
+            phrase,
+            // filters
+          },
           results: response.data.items,
           aggs: {
             types: response.data.types,
