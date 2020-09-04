@@ -6,7 +6,7 @@ module.exports = [
 			name: 'eLife Sciences Publications Ltd',
 			url: 'https://elifesciences.org/'
 		},
-		description: `eLife is a selective, not for profit peer-reviewed open access scientific journal for the biomedical and life sciences. It was established at the end of 2012 by the Howard Hughes Medical Institute, Max Planck Society, and Wellcome Trust, following a workshop held in 2010 at the Janelia Farm Research Campus.`,
+		description: `eLife is a selective, not for profit peer-reviewed open access scientific journal for the biomedical and life sciences.<br />It was established at the end of 2012 by the Howard Hughes Medical Institute, Max Planck Society, and Wellcome Trust, following a workshop held in 2010 at the Janelia Farm Research Campus.`,
 		editorialBoard: [{
 			role: 'chief-editor',
 			name: 'Michael Eisen'
