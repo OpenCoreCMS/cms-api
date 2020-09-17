@@ -14,8 +14,14 @@ const server = Hapi.server({ host: 'localhost', port: 4000 });
 server.route({
 	method: 'GET', path: '/',
 	handler: (request, h) => {
-		return 'OK // Open Publishing Platform - BFF 0.1.0';
+		return 'OK \n<br/>// Open Publishing Platform - BFF 0.1.0\n<br/>// See /api/v1/docs';
 	}
+});
+
+// /api/v1/docs
+server.route({
+	method: 'GET', path: '/api/v1/docs',
+	handler: require('./routes/docs')
 });
 
 // /api/v1/pages routes
