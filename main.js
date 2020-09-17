@@ -14,7 +14,7 @@ const server = Hapi.server({ host: 'localhost', port: 4000 });
 server.route({
 	method: 'GET', path: '/',
 	handler: (request, h) => {
-		return 'OK (OpenPublishingPlatform-Frontend-BFF 0.1.0)';
+		return 'OK // Open Publishing Platform - BFF 0.1.0';
 	}
 });
 
@@ -26,33 +26,33 @@ server.route({
 
 // /api/v1/search routes
 server.route({
-	method: 'GET', path: '/api/v1/search',
+	method: 'GET', path: '/api/v1/publications/search',
 	options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/search')
+	handler: require('./routes/publications/search')
 });
 
 // /api/v1/journals routes
 server.route({
-	method: 'GET', path: '/api/v1/journals/getAllJournals',
+	method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
 	options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/journals/getAllJournals')
+	handler: require('./routes/publications/journals/getAllJournals')
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/journals/{journalId}/getJournal',
+	method: 'GET', path: '/api/v1/publications/journals/{journalId}/getJournal',
   options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/journals/[journalId]/getJournal')
+	handler: require('./routes/publications/journals/[journalId]/getJournal')
 });
 
 server.route({
-  method: 'GET', path: '/api/v1/journals/{journalId}/getCurrentIssue',
-  handler: require('./routes/journals/[journalId]/getCurrentIssue')
+  method: 'GET', path: '/api/v1/publications/journals/{journalId}/getCurrentIssue',
+  handler: require('./routes/publications/journals/[journalId]/getCurrentIssue')
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/journals/articles/{articleId}/getArticle',
+	method: 'GET', path: '/api/v1/publications/journals/articles/{articleId}/getArticle',
   options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/journals/articles/[articleId]/getArticle')
+	handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
 });
 
 async function startServer() {
