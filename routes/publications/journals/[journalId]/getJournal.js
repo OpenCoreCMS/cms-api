@@ -1,9 +1,12 @@
-const _ = require('lodash');
-const mockJournals = require('../../../../data/journals');
+const MongoLib = require('../../../../lib/mongo');
 
-module.exports = function getAllJournalsHandler(request, h) {
-  const journalId = request.params.journalId;
-  console.log(`[Static] Getting journal: ${journalId}`);
-  const journalEntity = _.find(mockJournals, { id: journalId });
-  return { data: journalEntity };
+module.exports = async function getOneJournalHandler(request, h) {
+  return new Promise(resolve => {
+    const journalId = request.params.journalId;
+    console.log(`[API] Getting journal: ${journalId}`);
+
+    MongoLib.journals.find({ id: journalId }, (journalErr, journalData) => {
+      resolve({ data: journalData[0] });
+    });
+  });
 }

@@ -1,6 +1,9 @@
-const mockJournals = require('../../../data/journals');
+const MongoLib = require('../../../lib/mongo');
 
-module.exports = function getAllJournalsHandler(request, h) {
-  console.log(`[Static] Getting journals`);
-  return { data: mockJournals };
+module.exports = async function getAllJournalsHandler(request, h) {
+  return new Promise(resolve => {
+    MongoLib.journals.find({}, (allJournalsErr, allJournalsData) => {
+      resolve({ data: allJournalsData });
+    });
+  });
 }
