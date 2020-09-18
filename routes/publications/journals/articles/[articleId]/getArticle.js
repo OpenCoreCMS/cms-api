@@ -11,7 +11,7 @@ module.exports = async function getArticleHandler(request, h) {
 
   console.log(`[API] Fetching article: ${articleId}`);
 
-  const searchResults = await PublicationsAdapter.getArticle(articleId);
+  const searchResults = await PublicationsAdapter.getOneArticle(articleId);
   CACHE[articleId] = searchResults;
   return searchResults;
 }
