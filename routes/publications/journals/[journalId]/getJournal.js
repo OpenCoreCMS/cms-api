@@ -1,4 +1,4 @@
-const PublicationsAdapter = require('../../_adapters/elife');
+const PublicationsAdapter = require('../../_adapters/autoselect');
 
 module.exports = async function getOneJournalHandler(request, h) {
   const journalId = request.params.journalId;

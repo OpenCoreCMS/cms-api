@@ -1,4 +1,4 @@
-const PublicationsAdapter = require('../../_adapters/elife');
+const PublicationsAdapter = require('../../_adapters/autoselect');
 const CACHE = {};
 
 module.exports = async function getCurrentIssueHandler(request, h) {

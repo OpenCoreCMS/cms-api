@@ -1,4 +1,4 @@
-const PublicationsAdapter = require('./_adapters/elife');
+const PublicationsAdapter = require('./_adapters/autoselect');
 const querystring = require('querystring');
 const CACHE = {};
 

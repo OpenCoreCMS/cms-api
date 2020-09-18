@@ -4,7 +4,7 @@ const { makeStringUrlFriendly } = require('../../../lib/utils');
 async function getOneArticle(articleId) {
   return new Promise(resolve => {
     MongoLib.articles.find({ id: articleId }, (articleErr, articleData) => {
-      resolve( articleData[0] );
+      resolve({ data: articleData[0] });
     });
   });
 }
@@ -55,11 +55,11 @@ function search({ phrase, pageNumber, pageSize }) {
             phrase,
             // filters
           },
-          results: mappedResults,
           // aggs: {
           //   types: response.data.types,
           //   subjects: response.data.subjects,
-          // }
+          // },
+          results: mappedResults,
         },
       };
 
