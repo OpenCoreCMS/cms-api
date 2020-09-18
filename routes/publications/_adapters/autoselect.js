@@ -1,3 +1,3 @@
-const autoselectedPublicationsAdapter = require('./elife');
+const autoselectedPublicationsAdapter = require('./mongo');
 
 module.exports = autoselectedPublicationsAdapter;

@@ -37,6 +37,19 @@ server.route({
 	handler: require('./routes/publications/search')
 });
 
+// /api/v1/subjects routes
+server.route({
+	method: 'GET', path: '/api/v1/publications/subjects/getAllSubjects',
+	// options: { cache: { expiresIn: TTL_1H } },
+	handler: require('./routes/publications/subjects/getAllSubjects')
+});
+
+server.route({
+	method: 'GET', path: '/api/v1/publications/subjects/{subjectId}/getOneSubject',
+	// options: { cache: { expiresIn: TTL_1H } },
+	handler: require('./routes/publications/subjects/[subjectId]/getOneSubject')
+});
+
 // /api/v1/journals routes
 server.route({
 	method: 'GET', path: '/api/v1/publications/journals/getAllJournals',

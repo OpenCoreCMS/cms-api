@@ -33,6 +33,14 @@ async function getCurrentIssue() {
   });
 }
 
+async function getAllSubjects() {
+  return new Promise(resolve => {
+    MongoLib.subjects.find({}, (subjectsErr, subjectsData) => {
+      resolve({ data: subjectsData });
+    });
+  });
+}
+
 function search({ phrase, pageNumber, pageSize }) {
   return new Promise(resolve => {
     const searchParams = phrase ? { title: {$regex: new RegExp(phrase), $options: 'i'} } : {};
@@ -73,8 +81,9 @@ const MongoAdapter = {
   getOneJournal,
   getAllJournals,
   getOneArticle,
-
   getCurrentIssue,
+  getAllSubjects,
+
   search,
 };
 

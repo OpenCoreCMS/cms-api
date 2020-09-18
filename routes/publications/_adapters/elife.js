@@ -117,6 +117,29 @@ async function getCurrentIssue() {
 }
 
 /**
+ * Get all subjects
+ */
+async function getAllSubjects() {
+  const fullUrl = `https://prod--gateway.elifesciences.org/subjects`;
+
+  return axios.get(fullUrl)
+    .then(function (response) {
+      const finalResponse = {
+        data: {
+          total: response.data.total,
+          results: response.data.items,
+        },
+      }
+
+      return finalResponse;
+    })
+    .catch(function (error) {
+      console.log(error);
+      return { error: 'BFF had a problem resolving data from an external API' }
+    });
+}
+
+/**
  * Execute a content search
  *
  * Example params supported by eLife's public API
@@ -182,8 +205,9 @@ const eLifeAdapter = {
   getOneJournal,
   getAllJournals,
   getOneArticle,
-
   getCurrentIssue,
+  getAllSubjects,
+
   search,
 };
 
