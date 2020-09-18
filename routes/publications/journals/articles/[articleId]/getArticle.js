@@ -1,24 +1,17 @@
-const axios = require('axios');
+const PublicationsAdapter = require('../../../_adapters/elife');
 const CACHE = {};
 
-module.exports = function getAllJournalsHandler(request, h) {
+module.exports = async function getArticleHandler(request, h) {
   const articleId = request.params.articleId;
-  const fullUrl = `https://prod--gateway.elifesciences.org/articles/${articleId}`;
 
-  if (CACHE[fullUrl]) {
-    console.log(`[Cache] OK Retrieved article: ${articleId}`);
-    return { data: CACHE[fullUrl] };
+  if (CACHE[articleId]) {
+    console.log(`[Cache] Fetching article: ${articleId}`);
+    return { data: CACHE[articleId] };
   }
 
+  console.log(`[API] Fetching article: ${articleId}`);
 
-  return axios.get(fullUrl)
-    .then(function (response) {
-      console.log(`[API] OK Retrieved article: ${articleId}`);
-      CACHE[fullUrl] = response.data;
-      return { data: response.data };
-    })
-    .catch(function (error) {
-      console.log(error);
-      return { error: 'BFF had a problem resolving data from an external API' }
-    });
+  const searchResults = await PublicationsAdapter.getArticle(articleId);
+  CACHE[articleId] = searchResults;
+  return searchResults;
 }

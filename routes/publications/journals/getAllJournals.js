@@ -1,9 +1,7 @@
-const MongoLib = require('../../../lib/mongo');
+const PublicationsAdapter = require('../_adapters/elife');
 
 module.exports = async function getAllJournalsHandler(request, h) {
-  return new Promise(resolve => {
-    MongoLib.journals.find({}, (allJournalsErr, allJournalsData) => {
-      resolve({ data: allJournalsData });
-    });
-  });
+  console.log(`[API] Fetching all journals`);
+  const journalData = await PublicationsAdapter.getAllJournals();
+  return journalData;
 }
