@@ -30,10 +30,16 @@ server.route({
 	handler: require('./routes/pages/getPage/[pageId]')
 });
 
+// /api/v1/settings routes
+server.route({
+	method: 'GET', path: '/api/v1/settings/getSettingValue/{settingName}',
+	handler: require('./routes/settings/getSettingValue/[settingName]')
+});
+
 // /api/v1/search routes
 server.route({
 	method: 'GET', path: '/api/v1/publications/search',
-	options: { cache: { expiresIn: TTL_1H } },
+	// options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/publications/search')
 });
 
@@ -53,13 +59,13 @@ server.route({
 // /api/v1/journals routes
 server.route({
 	method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
-	options: { cache: { expiresIn: TTL_1H } },
+	// options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/publications/journals/getAllJournals')
 });
 
 server.route({
 	method: 'GET', path: '/api/v1/publications/journals/{journalId}/getJournal',
-  options: { cache: { expiresIn: TTL_1H } },
+  // options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/publications/journals/[journalId]/getJournal')
 });
 
@@ -70,7 +76,7 @@ server.route({
 
 server.route({
 	method: 'GET', path: '/api/v1/publications/journals/articles/{articleId}/getArticle',
-  options: { cache: { expiresIn: TTL_1H } },
+  // options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
 });
 
