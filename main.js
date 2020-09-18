@@ -2,8 +2,8 @@
 
 const Hapi = require('@hapi/hapi');
 
-const TTL_1M = 60000;
-const TTL_1H = 60 * TTL_1M;
+// const TTL_1M = 60000;
+// const TTL_1H = 60 * TTL_1M;
 
 const server = Hapi.server({ host: 'localhost', port: 4000 });
 
@@ -18,32 +18,55 @@ server.route({
 	}
 });
 
-// /api/v1/docs
+/**
+ * Docs route
+ * Returns a basic 200 OK response
+ */
 server.route({
 	method: 'GET', path: '/api/v1/docs',
 	handler: require('./routes/docs')
 });
 
-// /api/v1/pages routes
+/**
+ * Pages routes
+ */
 server.route({
 	method: 'GET', path: '/api/v1/pages/getPage/{pageId}',
 	handler: require('./routes/pages/getPage/[pageId]')
 });
 
-// /api/v1/settings routes
+/**
+ * Settings routes
+ */
 server.route({
 	method: 'GET', path: '/api/v1/settings/getSettingValue/{settingName}',
 	handler: require('./routes/settings/getSettingValue/[settingName]')
 });
 
-// /api/v1/search routes
+/**
+ * Users routes
+ */
+server.route({
+	method: 'GET', path: '/api/v1/users/getUser/{userId}',
+	handler: require('./routes/users/getUser')
+});
+
+server.route({
+	method: 'POST', path: '/api/v1/users/login',
+	handler: require('./routes/users/login')
+});
+
+/**
+ * Publications routes
+ */
+// search
 server.route({
 	method: 'GET', path: '/api/v1/publications/search',
 	// options: { cache: { expiresIn: TTL_1H } },
 	handler: require('./routes/publications/search')
 });
 
-// /api/v1/subjects routes
+// subjects
 server.route({
 	method: 'GET', path: '/api/v1/publications/subjects/getAllSubjects',
 	// options: { cache: { expiresIn: TTL_1H } },
@@ -56,7 +79,7 @@ server.route({
 	handler: require('./routes/publications/subjects/[subjectId]/getOneSubject')
 });
 
-// /api/v1/journals routes
+// journals
 server.route({
 	method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
 	// options: { cache: { expiresIn: TTL_1H } },
@@ -80,6 +103,9 @@ server.route({
 	handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
 });
 
+/**
+ * Start the server
+ */
 async function startServer() {
 	await server.start();
 	console.log('Server running at:', server.info.uri);
