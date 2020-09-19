@@ -8,6 +8,9 @@ while the data is provided in a consistent manner.
 
 **This application requires Node 14.**
 
+See [OPP UI demo](https://github.com/OpenPublishingPlatform/opp-bff-demo)
+for example UI implementation.
+
 
 ## Quick start
 ```
@@ -25,7 +28,7 @@ npm run data:seed
 npm run dev
 ```
 
-**OPP BFF** application will start on [`localhost:4000`](http://localhost:4000).
+**OPP BFF** application will start on [localhost:4000](http://localhost:4000).
 
 
 ## Configuration
