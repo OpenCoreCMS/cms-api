@@ -1,37 +1,79 @@
 module.exports = [
-	{
-		id: 'eLife',
-		name: 'eLife Sciences',
-		publisher: {
-			name: 'eLife Sciences Publications Ltd',
-			url: 'https://elifesciences.org/'
-		},
-		description: `eLife is a selective, not for profit peer-reviewed open access scientific journal for the biomedical and life sciences.<br />It was established at the end of 2012 by the Howard Hughes Medical Institute, Max Planck Society, and Wellcome Trust, following a workshop held in 2010 at the Janelia Farm Research Campus.`,
-		editorialBoard: [{
-			role: 'chief-editor',
-			name: 'Michael Eisen'
-		}],
-		indexing: {
-			mnemonic: 'eLife',
-			iso4: 'eLife', // ISO4 abbreviation
-			// doi: '10.0000/0000',
-			// issnPrint: '0000-0000',
-			issnOnline: '2050-084X',
-			coden: 'ELIFA8',
-			oclc: '813236730',
-		},
-		links: {
-			researchgate: 'https://www.researchgate.net/journal/2050-084X_eLife_Sciences'
-		},
-		frequency: 'continuous',
-		openAccess: 'full',
-		impactFactor: {
-			score: '7.080',
-			year: 2019
-		},
-		history: {
-			startDate: 2012
-		},
-		disciplines: ['biomedicine', 'life sciences']
-	}
+  {
+    id: 'journal-of-believable-research',
+    name: 'Journal of Believable Research',
+    publisher: {
+      name: 'OPP Test Publications',
+      url: 'https://openpublishingplatform.com/'
+    },
+    description: 'Test journal for the purposes of demonstrating Open Publishing Platform.',
+    editorialBoard: [
+      {
+        role: 'chief-editor',
+        name: 'John Realperson'
+      }
+    ],
+    indexing: {
+      mnemonic: 'JBR',
+      iso4: 'jbr', // ISO4 abbreviation
+      doi: '10.0000/0000',
+      issnPrint: '0000-0000',
+      issnOnline: '0000-0000',
+      coden: 'JBR007',
+      oclc: '123456789',
+    },
+    links: {},
+    frequency: 'continuous',
+    openAccess: 'full',
+    impactFactor: {
+      score: '7.080',
+      year: 2019
+    },
+    history: {
+      startDate: 2012
+    },
+    disciplines: [
+      'research',
+      'belief'
+    ]
+  },
+
+  {
+    id: 'journal-of-countless-examples',
+    name: 'Journal of Countless Examples',
+    publisher: {
+      name: 'OPP Test Publications',
+      url: 'https://openpublishingplatform.com/'
+    },
+    description: 'Test journal for the purposes of demonstrating Open Publishing Platform.',
+    editorialBoard: [
+      {
+        role: 'chief-editor',
+        name: 'Jane Testarossa'
+      }
+    ],
+    indexing: {
+      mnemonic: 'JCE',
+      iso4: 'jce', // ISO4 abbreviation
+      doi: '10.1000/0000',
+      issnPrint: '1000-0000',
+      issnOnline: '1000-0000',
+      coden: 'JCE001',
+      oclc: '987654321',
+    },
+    links: {},
+    frequency: '12/year',
+    openAccess: 'full',
+    impactFactor: {
+      score: '9.137',
+      year: 2019
+    },
+    history: {
+      startDate: 2012
+    },
+    disciplines: [
+      'examples',
+      'etc'
+    ]
+  },
 ];

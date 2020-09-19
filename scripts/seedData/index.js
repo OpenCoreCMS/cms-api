@@ -4,8 +4,9 @@ const MongoLib = require('../../lib/mongo');
 const data = {
   pages: require('./data/pages'),
   journals: require('./data/journals'),
+  articles: require('./data/articles'),
   users: require('./data/users'),
-  // subjects: require('./data/subjects')
+  subjects: require('./data/subjects')
 };
 
 function insertData(data, collection, key, callback) {
@@ -30,9 +31,13 @@ function insertData(data, collection, key, callback) {
 
 insertData(data.pages, 'pages', 'url', () => {
   insertData(data.journals, 'journals', 'id', () => {
-    insertData(data.users, 'users', 'email', () => {
-      console.log('Finished inserting seed data.')
-      process.exit(0);
+    insertData(data.articles, 'articles', 'id', () => {
+      insertData(data.subjects, 'subjects', 'id', () => {
+        insertData(data.users, 'users', 'email', () => {
+          console.log('Finished inserting seed data.')
+          process.exit(0);
+        });
+      });
     });
   });
 });
