@@ -12,10 +12,10 @@ const server = Hapi.server({ host: 'localhost', port: 4000 });
  * Returns a basic 200 OK response
  */
 server.route({
-	method: 'GET', path: '/',
-	handler: (request, h) => {
-		return 'OK \n<br/>// Open Publishing Platform - BFF 0.1.0\n<br/>// See /api/v1/docs';
-	}
+  method: 'GET', path: '/',
+  handler: (request, h) => {
+    return 'OK \n<br/>// Open Publishing Platform - BFF 0.1.0\n<br/>// See /api/v1/docs';
+  }
 });
 
 /**
@@ -23,37 +23,37 @@ server.route({
  * Returns a basic 200 OK response
  */
 server.route({
-	method: 'GET', path: '/api/v1/docs',
-	handler: require('./routes/docs')
+  method: 'GET', path: '/api/v1/docs',
+  handler: require('./routes/docs')
 });
 
 /**
  * Pages routes
  */
 server.route({
-	method: 'GET', path: '/api/v1/pages/getPage/{pageId}',
-	handler: require('./routes/pages/getPage/[pageId]')
+  method: 'GET', path: '/api/v1/pages/getPage/{pageId}',
+  handler: require('./routes/pages/getPage/[pageId]')
 });
 
 /**
  * Settings routes
  */
 server.route({
-	method: 'GET', path: '/api/v1/settings/getSettingValue/{settingName}',
-	handler: require('./routes/settings/getSettingValue/[settingName]')
+  method: 'GET', path: '/api/v1/settings/getSettingValue/{settingName}',
+  handler: require('./routes/settings/getSettingValue/[settingName]')
 });
 
 /**
  * Users routes
  */
 server.route({
-	method: 'GET', path: '/api/v1/users/getUser/{userId}',
-	handler: require('./routes/users/getUser')
+  method: 'GET', path: '/api/v1/users/getUser/{userId}',
+  handler: require('./routes/users/getUser')
 });
 
 server.route({
-	method: 'POST', path: '/api/v1/users/login',
-	handler: require('./routes/users/login')
+  method: 'POST', path: '/api/v1/users/login',
+  handler: require('./routes/users/login')
 });
 
 /**
@@ -61,35 +61,35 @@ server.route({
  */
 // search
 server.route({
-	method: 'GET', path: '/api/v1/publications/search',
-	// options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/search')
+  method: 'GET', path: '/api/v1/publications/search',
+  // options: { cache: { expiresIn: TTL_1H } },
+  handler: require('./routes/publications/search')
 });
 
 // subjects
 server.route({
-	method: 'GET', path: '/api/v1/publications/subjects/getAllSubjects',
-	// options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/subjects/getAllSubjects')
+  method: 'GET', path: '/api/v1/publications/subjects/getAllSubjects',
+  // options: { cache: { expiresIn: TTL_1H } },
+  handler: require('./routes/publications/subjects/getAllSubjects')
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/publications/subjects/{subjectId}/getOneSubject',
-	// options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/subjects/[subjectId]/getOneSubject')
+  method: 'GET', path: '/api/v1/publications/subjects/{subjectId}/getOneSubject',
+  // options: { cache: { expiresIn: TTL_1H } },
+  handler: require('./routes/publications/subjects/[subjectId]/getOneSubject')
 });
 
 // journals
 server.route({
-	method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
-	// options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/journals/getAllJournals')
+  method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
+  // options: { cache: { expiresIn: TTL_1H } },
+  handler: require('./routes/publications/journals/getAllJournals')
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/publications/journals/{journalId}/getJournal',
+  method: 'GET', path: '/api/v1/publications/journals/{journalId}/getJournal',
   // options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/journals/[journalId]/getJournal')
+  handler: require('./routes/publications/journals/[journalId]/getJournal')
 });
 
 server.route({
@@ -98,17 +98,17 @@ server.route({
 });
 
 server.route({
-	method: 'GET', path: '/api/v1/publications/journals/articles/{articleId}/getArticle',
+  method: 'GET', path: '/api/v1/publications/journals/articles/{articleId}/getArticle',
   // options: { cache: { expiresIn: TTL_1H } },
-	handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
+  handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
 });
 
 /**
  * Start the server
  */
 async function startServer() {
-	await server.start();
-	console.log('Server running at:', server.info.uri);
+  await server.start();
+  console.log('Server running at:', server.info.uri);
 }
 
 process.on('unhandledRejection', (err) => {
