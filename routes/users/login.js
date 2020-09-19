@@ -3,7 +3,6 @@ const EncryptionLib = require('../../lib/encryption');
 
 async function getOneUserHandler(request, h) {
   return new Promise(resolve => {
-    // const userId = request.params.userId;
     const payload = request.payload;
 
     if (!payload || !payload.email || !payload.password) {
@@ -22,7 +21,6 @@ async function getOneUserHandler(request, h) {
         return resolve({ error: 'Invalid credentials.' });
       }
 
-      // if pass hash matches then success
       resolve({ data: userData });
     });
   });
