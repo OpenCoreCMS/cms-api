@@ -6,6 +6,10 @@
   },
   "extends": "eslint:recommended",
   "rules": {
-    "no-unused-vars": ["error", { "argsIgnorePattern": "[h|request]" }]
+    "no-unused-vars": ["error", { "argsIgnorePattern": "[h|request]" }],
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "quote-props": ["error", "consistent-as-needed"],
+    "indent": ["error", 2],
+    "key-spacing": ["error", { "beforeColon": false }]
   }
 }
