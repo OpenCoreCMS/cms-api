@@ -1,12 +1,12 @@
 const _ = require('lodash');
-const MongoLib = require('../../lib/mongo');
+const MongoLib = require('../../../lib/mongo');
 
 const data = {
-  pages: require('./data/pages'),
-  journals: require('./data/journals'),
-  articles: require('./data/articles'),
-  users: require('./data/users'),
-  subjects: require('./data/subjects')
+  pages: require('./_data/pages'),
+  journals: require('./_data/journals'),
+  articles: require('./_data/articles'),
+  users: require('./_data/users'),
+  subjects: require('./_data/subjects')
 };
 
 function insertData(data, collection, key, callback) {
