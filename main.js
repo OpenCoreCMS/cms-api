@@ -7,6 +7,15 @@ const Hapi = require('@hapi/hapi');
 
 const server = Hapi.server({ host: 'localhost', port: 4000 });
 
+server.state('OPP_Session', {
+  ttl: 24 * 60 * 60 * 1000, // One day
+  isSecure: false,
+  isHttpOnly: false,
+  autoValue: async () => { return { authenticated: false } },
+  path: '/',
+  encoding: 'base64json'
+});
+
 /**
  * Base route
  * Returns a basic 200 OK response
@@ -47,13 +56,18 @@ server.route({
  * Users routes
  */
 server.route({
-  method: 'GET', path: '/api/v1/users/getUser/{userId}',
-  handler: require('./routes/users/getUser')
+  method: 'GET', path: '/api/v1/users/getCurrentUser',
+  handler: require('./routes/users/getCurrentUser')
 });
 
 server.route({
   method: 'POST', path: '/api/v1/users/login',
   handler: require('./routes/users/login')
+});
+
+server.route({
+  method: 'GET', path: '/api/v1/users/logout',
+  handler: require('./routes/users/logout')
 });
 
 /**
