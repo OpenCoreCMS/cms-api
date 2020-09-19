@@ -2,17 +2,18 @@
 
 const Hapi = require('@hapi/hapi');
 
-// const TTL_1M = 60000;
-// const TTL_1H = 60 * TTL_1M;
+const TTL_1M = 60 * 1000;
+const TTL_1H = 60 * TTL_1M;
+const TTL_1D = 24 * TTL_1H;
 
 const server = Hapi.server({ host: 'localhost', port: 4000 });
 
 server.state('OPP_Session', {
-  ttl: 24 * 60 * 60 * 1000, // One day
+  ttl: 7 * TTL_1D,
   isSecure: false,
   isHttpOnly: false,
-  autoValue: async () => { return { authenticated: false } },
   path: '/',
+  autoValue: async () => { return { authenticated: false, fallbackValueSource: 'CookieConfig' } },
   encoding: 'base64json'
 });
 
