@@ -17,9 +17,8 @@ const markup = `
 `;
 
 
-function getPageHandler(request, h) {
+function docsPageHandler(request, h) {
   return markup;
-  // return { data: { error: 'Page not found', statusCode: 404 }};
 }
 
-module.exports = getPageHandler;
+module.exports = docsPageHandler;

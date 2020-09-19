@@ -36,6 +36,11 @@ server.route({
   handler: require('./routes/docs')
 });
 
+server.route({
+  method: 'GET', path: '/api/v1/docs/test',
+  handler: require('./routes/docs/test')
+});
+
 /**
  * Pages routes
  */
