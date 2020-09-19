@@ -1,36 +1,27 @@
 # OPP BFF
 
-**BFF** stands for **_Backend For Frontend_**.
+**OPP BFF** (_Backend For Frontend_) provides the data to **OPP UI application**,
+abstracting the data fetching and business logic away from the user interface.
 
-**BFF** provides the data to **OPP UI application**, abstracting the data fetching
-and business logic away from the user interface concerns.
-
-By providing stable data structures the UI development can be more
-streamlined and more focused while the data is maintained in a consistent way.
+By providing stable data structures the UI can be more streamlined and focused
+while the data is provided in a consistent manner.
 
 **This application requires Node 14.**
 
 
 ## Quick start
-
-1. Clone the repo
 ```
+# 1. Clone the repo
 git clone https://github.com/OpenPublishingPlatform/opp-bff-demo.git
 cd opp-bff-demo
-```
 
-2. Install devDependencies
-```
+# 2. Install dependencies
 npm install
-```
 
-3. Seed the initial data to MongoDB
-```
+# 3. Seed the initial data to MongoDB
 npm run data:seed
-```
 
-4. Start the app
-```
+# 4. Start the app
 npm run dev
 ```
 
