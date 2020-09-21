@@ -27,13 +27,14 @@ async function userLoginHandler(request, h) {
       // store in session
       const cleanUserData = {
         authenticated: true,
+        lastAction: 'login',
         email: userData[0].email,
         firstname: userData[0].firstname,
         lastname: userData[0].lastname
       }
 
       h.state('OPP_Session', cleanUserData);
-      resolve({ data: true });
+      resolve({ data: cleanUserData });
     });
   });
 }
