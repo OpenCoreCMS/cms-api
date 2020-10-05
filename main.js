@@ -1,12 +1,13 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
+const config = require('./lib/config');
 
 const TTL_1M = 60 * 1000;
 const TTL_1H = 60 * TTL_1M;
 const TTL_1D = 24 * TTL_1H;
 
-const server = Hapi.server({ host: 'localhost', port: 4000 });
+const server = Hapi.server({ host: 'localhost', port: config.appPort });
 
 server.state('OPP_Session', {
   ttl: 7 * TTL_1D,
