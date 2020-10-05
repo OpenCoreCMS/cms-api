@@ -41,9 +41,19 @@ async function getAllSubjects() {
   });
 }
 
-function search({ phrase, pageNumber, pageSize }) {
+function search({ phrase, pageNumber, pageSize, subjectId }) {
   return new Promise(resolve => {
-    const searchParams = phrase ? { title: {$regex: new RegExp(phrase), $options: 'i'} } : {};
+    const searchParams = {};
+
+    if (phrase) {
+      searchParams.title = { $regex: new RegExp(phrase), $options: 'i' };
+    }
+
+    if (subjectId) {
+      searchParams.subjects = { $in: [subjectId] };
+    }
+    console.log(searchParams);
+
     MongoLib.articles.find(searchParams, (searchErr, searchResults) => {
       const mappedResults = searchResults.map((res) => {
         res.url = `/journals/${res.journalId}/article/${res.id}/${makeStringUrlFriendly(res.title)}`

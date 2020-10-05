@@ -3,8 +3,8 @@ const querystring = require('querystring');
 const CACHE = {};
 
 module.exports = async function searchHandler(request, h) {
-  const { phrase, pageNumber = 1, pageSize = 10 } = request.query;
-  const searchParams = { phrase, pageNumber, pageSize };
+  const { phrase, pageNumber = 1, pageSize = 10, subjectId } = request.query;
+  const searchParams = { phrase, pageNumber, pageSize, subjectId };
 
   const searchParamsString = querystring.stringify(searchParams);
 
