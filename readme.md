@@ -1,23 +1,24 @@
-# Open Publishing Platform BFF Demo
+# Open Publishing Platform BFF
 
-**OPP BFF** (_Backend For Frontend_) provides the data to **OPP UI** application.
+**OPP BFF** (_Backend For Frontend_) is an API that provides data to the UI app.
 It abstracts the data fetching and business logic away from the user interface.
+
+UI application can be more streamlined and focused by having **OPP BFF**
+providing stable data structures in a clean, consistent manner.
 
 For an example UI implementation see
 [**OPP UI** demo repo](https://github.com/OpenPublishingPlatform/opp-ui-demo).
 
-The **OPP UI** can be more streamlined and focused by having
-**OPP BFF** providing stable data structures in a clean, consistent manner.
+
+## Quick start
 
 **This application requires Node 14.**
 
 
-## Quick start
-
 ```
 # 1. Clone the repo
-git clone https://github.com/OpenPublishingPlatform/opp-bff-demo.git
-cd opp-bff-demo
+git clone https://github.com/OpenPublishingPlatform/opp-bff.git
+cd opp-bff
 
 # 2. Install dependencies
 npm install
