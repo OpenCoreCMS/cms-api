@@ -2,7 +2,7 @@ const markup = `
 <html>
 <body>
 
-<h1>Login test - OPP BFF 0.1.0</h1>
+<h1>Login test - OpenCoreCMS API 0.1.0</h1>
 <form action="/api/v1/users/login" method="POST">
   <input type="text" name="email" />
   <br />
@@ -16,8 +16,8 @@ const markup = `
 `;
 
 
-function docsTestPageHandler(request, h) {
-  return markup;
+function docsTestPageHandler(req, res) {
+  return res.send(markup);
 }
 
 module.exports = docsTestPageHandler;

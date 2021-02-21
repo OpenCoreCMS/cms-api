@@ -1,6 +1,8 @@
-async function userLogoutHandler(request, h) {
-  h.state('OPP_Session', { authenticated: false, lastAction: 'logout' });
-  return { error: null, data: true };
+function userLogoutHandler(req, res) {
+  req.session = { authenticated: false, lastAction: 'logout' };
+  req.session.save(() => {
+    return res.json({ error: null, data: true });
+  });
 }
 
 module.exports = userLogoutHandler;

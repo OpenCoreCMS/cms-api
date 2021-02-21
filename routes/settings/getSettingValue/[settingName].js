@@ -1,11 +1,9 @@
 const MongoLib = require('../../../lib/mongo');
 
-module.exports = async function getSettingValueHandler(request, h) {
-  const settingName = request.params.settingName;
+module.exports = function getSettingValueHandler(req, res) {
+  const settingName = req.params.settingName;
 
-  return new Promise(resolve => {
-    MongoLib.settings.find({ name: settingName }, (settingErr, settingData) => {
-      resolve({ data: settingData[0] });
-    });
+  return MongoLib.settings.find({ name: settingName }, (settingErr, settingData) => {
+    return res.json({ data: settingData[0] });
   });
 }

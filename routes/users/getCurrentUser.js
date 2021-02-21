@@ -1,8 +1,6 @@
-async function getCurrentUserHandler(request, h) {
-  const OPP_Session = request.state.OPP_Session || { authenticated: false, fallbackValueSource: 'GetCurrentUserHandler' };
-  return new Promise(resolve => {
-    resolve({ data: OPP_Session })
-  });
+function getCurrentUserHandler(req, res) {
+  const fallbackValue = { authenticated: false, fallbackValueSource: 'GetCurrentUserHandler' };
+  return res.json({ data: req.session || fallbackValue });
 }
 
 module.exports = getCurrentUserHandler;
