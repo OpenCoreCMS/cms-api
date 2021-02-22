@@ -1,13 +1,13 @@
-# Open Publishing Platform BFF
+# Open Core CMS API
 
-**OPP BFF** (_Backend For Frontend_) is an API that provides data to the UI app.
+**Open Core CMS API** provides data to the UI app.
 It abstracts the data fetching and business logic away from the user interface.
 
-UI application can be more streamlined and focused by having **OPP BFF**
+UI application can be more streamlined and focused by having **OCC API**
 providing stable data structures in a clean, consistent manner.
 
 For an example UI implementation see
-[**OPP UI** demo repo](https://github.com/OpenPublishingPlatform/opp-ui-demo).
+[**Open Core CMS UI** demo repo](https://github.com/OpenCoreCMS/cms-ui-demo).
 
 
 ## Quick start
@@ -17,8 +17,8 @@ For an example UI implementation see
 
 ```
 # 1. Clone the repo
-git clone https://github.com/OpenPublishingPlatform/opp-bff.git
-cd opp-bff
+git clone https://github.com/OpenCoreCMS/cms-api.git
+cd cms-api
 
 # 2. Install dependencies
 npm install
@@ -30,7 +30,7 @@ npm run data:seed
 npm run dev
 ```
 
-**OPP BFF** application will start on [localhost:4000](http://localhost:4000).
+**OCC API** application will start on [localhost:4000](http://localhost:4000).
 
 
 ## Configuration
@@ -38,6 +38,6 @@ Application config is controlled with the following environment variables:
 
 - `PORT` _(default: 4000)_
 - `MONGO_URL` _(default: mongodb://localhost:27017)_
-- `MONGO_DBNAME` _(default: opp-bff-main)_
+- `MONGO_DBNAME` _(default: opencorecms-api-main)_
 - `BYPASS_AUTH` _(default: false)_
 - `BYPASS_CACHE` _(default: false)_

@@ -3,10 +3,10 @@ module.exports = [
     id: 'journal-of-believable-research',
     name: 'Journal of Believable Research',
     publisher: {
-      name: 'OPP Test Publications',
-      url: 'https://openpublishingplatform.com/'
+      name: 'OCC Test Publications',
+      url: 'https://opencorecms.com/'
     },
-    description: 'Test journal for the purposes of demonstrating Open Publishing Platform.',
+    description: 'Test journal for the purposes of demonstrating Open Core CMS.',
     editorialBoard: [
       {
         role: 'chief-editor',
@@ -42,10 +42,10 @@ module.exports = [
     id: 'journal-of-countless-examples',
     name: 'Journal of Countless Examples',
     publisher: {
-      name: 'OPP Test Publications',
-      url: 'https://openpublishingplatform.com/'
+      name: 'OCC Test Publications',
+      url: 'https://opencorecms.com/'
     },
-    description: 'Test journal for the purposes of demonstrating Open Publishing Platform.',
+    description: 'Test journal for the purposes of demonstrating Open Core CMS.',
     editorialBoard: [
       {
         role: 'chief-editor',

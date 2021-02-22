@@ -48,9 +48,9 @@ const journalsData = [
 
 /**
  * Generic content item mapper
- * Transforms eLife content items to the standard OPP format
+ * Transforms eLife content items to the standard Open Core CMS format
  */
-function mapResultToOPP(res) {
+function mapResultToOCC(res) {
   const rtn = res && res.item ? res.item : res;
   rtn.journalId = 'elife';
   rtn.url = `/journals/${rtn.journalId}/article/${res.id}/${makeStringUrlFriendly(res.title)}`
@@ -99,7 +99,7 @@ async function getCurrentIssue() {
 
   return axios.get(fullUrl)
     .then(function (response) {
-      const mappedResults = response.data.items.map(mapResultToOPP);
+      const mappedResults = response.data.items.map(mapResultToOCC);
 
       const finalResponse = {
         data: {
@@ -166,7 +166,7 @@ function search({ phrase, pageNumber, pageSize }) {
 
   return axios.get(fullUrl)
     .then(function (response) {
-      const mappedResults = response.data.items.map(mapResultToOPP);
+      const mappedResults = response.data.items.map(mapResultToOCC);
 
       const finalResponse = {
         error: null,

@@ -1,13 +1,13 @@
 module.exports = [
   {
     url: '/help/about',
-    title: 'About OPP Demo Platform',
-    description: 'OPP Demo Platform brings together Open Access content to show an example use case of the Open Publishing Platform.',
+    title: 'About Open Core CMS Demo',
+    description: 'Open Core CMS Demo brings together Open Access content to show an example use case of the Open Core CMS.',
     template: 'oneColumnReadingWidth',
     content: [
       {
         type: 'html',
-        value: '<div>Open Publishing Platform is an open-source solution to digital presence of publishers big and small.</div>',
+        value: '<div>Open Core CMS is an open-source solution to very common workflows in digital publishing.</div>',
       },
     ]
   },
