@@ -12,15 +12,15 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(session({
   name: 'OCC_SID',
-  secret: 'keyboard cat',
-  // resave: true,
-  // saveUninitialized: true,
+  secret: 'TotallyUnguessableSecretHere',
+  resave: true,
+  saveUninitialized: true,
   cookie: {
     // secure: true,
     // rolling: true,
     // httpOnly: false,
     // path: '/',
-    maxAge: 24 * 3600000
+    maxAge: TTL_1D
   }
 }));
 
@@ -30,7 +30,7 @@ app.use(session({
  * Returns a basic 200 OK response
  */
 app.get('/', function rootRouteGetMethod (req, res) {
-    return res.send('OK \n<br/>// OpenCoreCMS - API 0.1.0\n<br/>// See /api/v1/docs');
+  return res.send('OK \n<br/>// OpenCoreCMS - API 0.1.0\n<br/>// See /api/v1/docs');
 });
 
 /**

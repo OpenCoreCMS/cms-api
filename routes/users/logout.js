@@ -1,6 +1,6 @@
 function userLogoutHandler(req, res) {
-  req.session = { authenticated: false, lastAction: 'logout' };
-  req.session.save(() => {
+  req.session.user = { authenticated: false, lastAction: 'logout' };
+  req.session.save((err) => {
     return res.json({ error: null, data: true });
   });
 }
