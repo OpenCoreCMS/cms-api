@@ -57,52 +57,25 @@ app.get('/api/v1/users/getCurrentUser', require('./routes/users/getCurrentUser')
 app.post('/api/v1/users/login', require('./routes/users/login'));
 app.get('/api/v1/users/logout', require('./routes/users/logout'));
 
-// /**
-//  * Publications routes
-//  */
-// // search
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/search',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/search')
-// });
-//
-// // subjects
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/subjects/getAllSubjects',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/subjects/getAllSubjects')
-// });
-//
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/subjects/{subjectId}/getOneSubject',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/subjects/[subjectId]/getOneSubject')
-// });
-//
-// // journals
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/journals/getAllJournals',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/journals/getAllJournals')
-// });
-//
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/journals/{journalId}/getJournal',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/journals/[journalId]/getJournal')
-// });
-//
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/journals/{journalId}/getCurrentIssue',
-//   handler: require('./routes/publications/journals/[journalId]/getCurrentIssue')
-// });
-//
-// server.route({
-//   method: 'GET', path: '/api/v1/publications/journals/articles/{articleId}/getArticle',
-//   // options: { cache: { expiresIn: TTL_1H } },
-//   handler: require('./routes/publications/journals/articles/[articleId]/getArticle')
-// });
+/**
+ * Publications routes
+ */
+// search
+app.get('/api/v1/publications/search', require('./routes/publications/search'));
+
+// subjects
+app.get('/api/v1/publications/subjects/getAllSubjects', require('./routes/publications/subjects/getAllSubjects'));
+
+app.get('/api/v1/publications/subjects/:subjectId/getOneSubject',require('./routes/publications/subjects/[subjectId]/getOneSubject'));
+
+// journals
+app.get('/api/v1/publications/journals/getAllJournals', require('./routes/publications/journals/getAllJournals'));
+
+app.get('/api/v1/publications/journals/:journalId/getJournal', require('./routes/publications/journals/[journalId]/getJournal'));
+
+app.get('/api/v1/publications/journals/:journalId/getCurrentIssue', require('./routes/publications/journals/[journalId]/getCurrentIssue'));
+
+app.get('/api/v1/publications/journals/articles/:articleId/getArticle', require('./routes/publications/journals/articles/[articleId]/getArticle'));
 
 /**
  * Start the server

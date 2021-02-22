@@ -1,17 +1,18 @@
 const PublicationsAdapter = require('../../_adapters/autoselect');
 const CACHE = {};
 
-module.exports = async function getCurrentIssueHandler(request, h) {
-  const journalId = request.params.journalId;
+module.exports = function getCurrentIssueHandler(req, res) {
+  const journalId = req.params.journalId;
 
   if (CACHE[journalId]) {
     console.log(`[Cache] Fetching results for current issue of journal: ${journalId}`);
-    return CACHE[journalId];
+    return res.json(CACHE[journalId]);
   }
 
   console.log(`[API] Fetching results for current issue of journal: ${journalId}`);
 
-  const currentIssueContent = await PublicationsAdapter.getCurrentIssue();
-  CACHE[journalId] = currentIssueContent;
-  return currentIssueContent;
+  return PublicationsAdapter.getCurrentIssue((currentIssueError, currentIssueContent) => {
+    CACHE[journalId] = currentIssueContent;
+    return res.json(currentIssueContent);
+  });
 }

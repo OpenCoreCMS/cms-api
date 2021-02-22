@@ -1,90 +1,77 @@
 const MongoLib = require('../../../lib/mongo');
 const { makeStringUrlFriendly } = require('../../../lib/utils');
 
-async function getOneArticle(articleId) {
-  return new Promise(resolve => {
-    MongoLib.articles.find({ id: articleId }, (articleErr, articleData) => {
-      resolve({ data: articleData[0] });
-    });
+function getOneArticle(articleId, callback) {
+  return MongoLib.articles.find({ id: articleId }, (articleErr, articleData) => {
+    return callback(null, { data: articleData[0] });
   });
 }
 
-async function getAllJournals() {
-  return new Promise(resolve => {
-    MongoLib.journals.find({}, (allJournalsErr, allJournalsData) => {
-      resolve({ data: allJournalsData });
-    });
+function getAllJournals(callback) {
+  return MongoLib.journals.find({}, (allJournalsErr, allJournalsData) => {
+    return callback(null, { data: allJournalsData });
   });
 }
 
-async function getOneJournal(journalId) {
-  return new Promise(resolve => {
-    MongoLib.journals.find({ id: journalId }, (allJournalsErr, allJournalsData) => {
-      resolve({ data: allJournalsData[0] });
-    });
+function getOneJournal(journalId, callback) {
+  return MongoLib.journals.find({ id: journalId }, (allJournalsErr, allJournalsData) => {
+    return callback(null, { data: allJournalsData[0] });
   });
 }
 
-async function getCurrentIssue() {
-  return new Promise(resolve => {
-    MongoLib.articles.find({}, (articleErr, articleData) => {
-      resolve({ data: articleData });
-    });
+function getCurrentIssue(callback) {
+  return MongoLib.articles.find({}, (articleErr, articleData) => {
+    return callback(null, { data: articleData });
   });
 }
 
-async function getAllSubjects() {
-  return new Promise(resolve => {
-    MongoLib.subjects.find({}, (subjectsErr, subjectsData) => {
-      resolve({ data: subjectsData });
-    });
+function getAllSubjects(callback) {
+  return MongoLib.subjects.find({}, (subjectsErr, subjectsData) => {
+    return callback(null, { data: subjectsData });
   });
 }
 
-function search({ phrase, pageNumber, pageSize, subjectId }) {
-  return new Promise(resolve => {
-    const searchParams = {};
+function search({ phrase, pageNumber, pageSize, subjectId }, callback) {
+  const searchParams = {};
 
-    if (phrase) {
-      searchParams.title = { $regex: new RegExp(phrase), $options: 'i' };
-    }
+  if (phrase) {
+    searchParams.title = { $regex: new RegExp(phrase), $options: 'i' };
+  }
 
-    if (subjectId) {
-      searchParams.subjects = { $in: [subjectId] };
-    }
-    console.log(searchParams);
+  if (subjectId) {
+    searchParams.subjects = { $in: [subjectId] };
+  }
+  console.log(searchParams);
 
-    MongoLib.articles.find(searchParams, (searchErr, searchResults) => {
-      const mappedResults = searchResults.map((res) => {
-        res.url = `/journals/${res.journalId}/article/${res.id}/${makeStringUrlFriendly(res.title)}`
-        return res;
-      });
+  return MongoLib.articles.find(searchParams, (searchErr, searchResults) => {
+    const mappedResults = searchResults.map((res) => {
+      res.url = `/journals/${res.journalId}/article/${res.id}/${makeStringUrlFriendly(res.title)}`
+      return res;
+    });
 
-      const finalResponse = {
-        error: null,
-        data: {
-          total: mappedResults.length,
-          pages: {
-            pageNumber: pageNumber || 1,
-            pageSize: pageSize || 10,
-            totalPages: Math.ceil(mappedResults.length / (pageSize || 10)),
-          },
-          query: {
-            phrase,
-            // filters
-          },
-          // aggs: {
-          //   types: response.data.types,
-          //   subjects: response.data.subjects,
-          // },
-          results: mappedResults,
+    const finalResponse = {
+      error: null,
+      data: {
+        total: mappedResults.length,
+        pages: {
+          pageNumber: pageNumber || 1,
+          pageSize: pageSize || 10,
+          totalPages: Math.ceil(mappedResults.length / (pageSize || 10)),
         },
-      };
+        query: {
+          phrase,
+          // filters
+        },
+        // aggs: {
+        //   types: response.data.types,
+        //   subjects: response.data.subjects,
+        // },
+        results: mappedResults,
+      },
+    };
 
-      resolve(finalResponse);
-    });
+    return callback(null, finalResponse);
   });
-
 }
 
 const MongoAdapter = {

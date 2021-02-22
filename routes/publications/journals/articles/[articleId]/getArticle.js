@@ -3,19 +3,20 @@ const config = require('../../../../../lib/config');
 const BYPASS_CACHE = config.bypassCache;
 const CACHE = {};
 
-module.exports = async function getArticleHandler(request, h) {
-  const articleId = request.params.articleId;
+module.exports = function getArticleHandler(req, res) {
+  const articleId = req.params.articleId;
 
   if (!BYPASS_CACHE && CACHE[articleId]) {
     console.log(`[Cache] Fetching article: ${articleId}`);
-    return CACHE[articleId];
+    return res.json(CACHE[articleId]);
   }
 
   console.log(`[API] Fetching article: ${articleId}`);
 
-  const searchResults = await PublicationsAdapter.getOneArticle(articleId);
-  if (!BYPASS_CACHE) {
-    CACHE[articleId] = searchResults;
-  }
-  return searchResults;
+  return PublicationsAdapter.getOneArticle(articleId, (searchError, searchResults) => {
+    if (!BYPASS_CACHE) {
+      CACHE[articleId] = searchResults;
+    }
+    return res.json(searchResults);
+  });
 }

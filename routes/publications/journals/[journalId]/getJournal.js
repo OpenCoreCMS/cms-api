@@ -1,8 +1,9 @@
 const PublicationsAdapter = require('../../_adapters/autoselect');
 
-module.exports = async function getOneJournalHandler(request, h) {
-  const journalId = request.params.journalId;
+module.exports = function getOneJournalHandler(req, res) {
+  const journalId = req.params.journalId;
   console.log(`[API] Fetching journal: ${journalId}`);
-  const journalData = await PublicationsAdapter.getOneJournal(journalId);
-  return journalData;
+  return PublicationsAdapter.getOneJournal(journalId, (journalErr, journalData) => {
+    return res.json(journalData);
+  });
 }
