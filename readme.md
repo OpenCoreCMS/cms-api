@@ -12,9 +12,6 @@ For an example UI implementation see
 
 ## Quick start
 
-**This application requires Node 14.**
-
-
 ```
 # 1. Clone the repo
 git clone https://github.com/OpenCoreCMS/cms-api.git

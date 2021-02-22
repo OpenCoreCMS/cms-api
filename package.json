@@ -8,6 +8,7 @@
     "start": "node main.js",
     "lint": "eslint .",
     "data:seed": "node scripts/data/seed",
+    "data:createUser": "node scripts/data/createUser",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
