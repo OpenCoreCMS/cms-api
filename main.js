@@ -1,8 +1,16 @@
 'use strict';
 
-const express = require('express');
-const session = require('express-session');
+/**
+ * Open Core CMS API
+ * Alpha build v0.1.0
+ */
+
+// ./lib/config needs to be the first import, it contains DEBUG env var defaults
 const config = require('./lib/config');
+const debug = require('debug');
+const express = require('express');
+const expressSession = require('express-session');
+const expressBodyParser = require('body-parser')
 
 const TTL_1M = 60 * 1000;
 const TTL_1H = 60 * TTL_1M;
@@ -10,7 +18,7 @@ const TTL_1D = 24 * TTL_1H;
 
 const app = express();
 app.set('trust proxy', 1);
-app.use(session({
+app.use(expressSession({
   name: 'OCC_SID',
   secret: 'TotallyUnguessableSecretHere',
   resave: true,
@@ -24,6 +32,11 @@ app.use(session({
   }
 }));
 
+// parse application/x-www-form-urlencoded
+app.use(expressBodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(expressBodyParser.json());
 
 /**
  * Base route
@@ -81,22 +94,21 @@ app.get('/api/v1/publications/journals/articles/:articleId/getArticle', require(
  * Start the server
  */
 function startServer() {
-  return app.listen(config.appPort, (argzzz) => {
-    // console.log('Server running at:', server.info.uri);
-    console.log('Server running at:', config.appPort);
-    console.log(argzzz);
+  app.use((err, _req, res, _next) => {
+    debug('opencorecms:api:error')(err.stack);
+    return res.sendStatus(500);
+  });
+
+  app.use((req, res) => {
+    debug('opencorecms:api:error')(`Error 404 on URL: ${req.url}`);
+    return res.sendStatus(404);
+  });
+
+  return app.listen(config.appPort, () => {
+    const serverStartSuccessMessage = `Open Core CMS API is now running on port ${config.appPort}.`;
+    console.log(serverStartSuccessMessage);
+    debug('opencorecms:api:debug')(serverStartSuccessMessage);
   });
 }
-
-process.on('unhandledRejection', (err) => {
-  console.log(err);
-  process.exit(1);
-});
-
-// server.events.on({ name: 'request', channels: 'internal' }, (request, event, tags) => {
-//   if (tags.error && tags.state) {
-//     console.error(event);
-//   }
-// });
 
 startServer();
